@@ -1,6 +1,6 @@
 import s from "./Content.module.scss";
 
-const Content= () => {
+const Content = () => {
 
     return (
         <div className={s.content}>

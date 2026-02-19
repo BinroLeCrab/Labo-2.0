@@ -1,6 +1,6 @@
 import s from "./Noise.module.scss";
 
-const Noise= () => {
+const Noise = () => {
 
     return (
         <div className={s.noise}></div>

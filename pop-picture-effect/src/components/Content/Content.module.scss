@@ -1,11 +1,17 @@
 .content {
-    border: 1px solid red;
+    // border: 1px solid red;
     width: 100%;
     height: 100dvh;
+    background: linear-gradient(#D36CC6, #D23784);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     .moist {
         width: 100%;
-        height: 100%;
+        height: 95%;
+        opacity: 0.9;
         filter: invert(1);
+        mix-blend-mode: multiply;
     }
 }
