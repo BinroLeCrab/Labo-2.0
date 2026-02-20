@@ -1,13 +1,11 @@
 .PopPictures {
     position: relative;
     overflow: hidden;
-    border: 1px solid blue;
 
     .ItemPicture {
         position: absolute;
-        width: 150px;
-        height: 180px;
-        background: red;
+        max-height: 200px;
+        max-width: 300px;
         z-index: 2;
     }
 }

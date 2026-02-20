@@ -3,6 +3,9 @@ import s from "./PopPictures.module.scss";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import ItemPictures from "./ItemPicture";
+import pictures from "../../Constant/Pictures";
+import { DrawIdInOrder } from "../../Utils/DrawId";
+import c_Pictures from "../../Constant/Pictures";
 
 const PopPictures = ({ children }) => {
 
@@ -12,6 +15,7 @@ const PopPictures = ({ children }) => {
     const previousCoordinates = useRef({ x: 0, y: 0 });
     const timer = useRef(0);
     const [s_pictures, setSPictures] = useState([]);
+    const currentPictureId = useRef(0);
 
     const loop = (time, deltaTime, frame) => {
         timer.current += deltaTime * 0.001;
@@ -20,11 +24,15 @@ const PopPictures = ({ children }) => {
         timer.current = 0;
 
         if (coordinates.current.x !== previousCoordinates.current.x || coordinates.current.y !== previousCoordinates.current.y) {
-            console.log(coordinates.current);
+
+            const pictureSrc = c_Pictures[currentPictureId.current];
+            currentPictureId.current = DrawIdInOrder(currentPictureId.current, c_Pictures.length - 1);
+
             const newPicture = {
-                id: Date.now() + coordinates.current.x + coordinates.current.y,
+                id: `${Date.now()}${coordinates.current.x}${coordinates.current.y}`,
                 x: coordinates.current.x,
-                y: coordinates.current.y
+                y: coordinates.current.y,
+                src: pictureSrc
             };
             setSPictures(prev => [...prev, newPicture]);
             previousCoordinates.current = { ...coordinates.current };
@@ -60,7 +68,14 @@ const PopPictures = ({ children }) => {
             className={s.PopPictures}
         >
             {s_pictures.map((picture) => (
-                <ItemPictures key={picture.id} id={picture.id} x={picture.x} y={picture.y} onComplete={removePicture} />
+                <ItemPictures
+                    key={picture.id}
+                    id={picture.id}
+                    x={picture.x}
+                    y={picture.y}
+                    onComplete={removePicture}
+                    picture={picture.src}
+                />
             ))}
             {children}
         </div>

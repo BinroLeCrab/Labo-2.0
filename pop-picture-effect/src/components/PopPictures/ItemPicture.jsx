@@ -3,7 +3,7 @@ import s from "./PopPictures.module.scss";
 import gsap from "gsap";
 import { useRef } from "react";
 
-const ItemPictures = ({ id, x, y, onComplete}) => {
+const ItemPictures = ({ id, x, y, picture, onComplete}) => {
 
     const item_Ref = useRef();
 
@@ -11,6 +11,7 @@ const ItemPictures = ({ id, x, y, onComplete}) => {
         const tl = gsap.timeline();
         tl.from(item_Ref.current, {
             scale: 0,
+            transform: "translate(0, 25%)",
             duration: 0.2,
             // transform : "translate(-50%, -50%)",
             ease: "power2.out"
@@ -18,7 +19,7 @@ const ItemPictures = ({ id, x, y, onComplete}) => {
         tl.to(item_Ref.current, {
             scale: 0,
             opacity: 0,
-            delay: 1,
+            delay: 1.5,
             duration: 0.3,
             ease: "power2.out",
             onComplete: () => {
@@ -33,8 +34,7 @@ const ItemPictures = ({ id, x, y, onComplete}) => {
     };
 
     return (
-        <div ref={item_Ref} className={s.ItemPicture} style={style}>
-        </div>
+        <img src={picture} ref={item_Ref} className={s.ItemPicture} style={style} alt="" />
     );
 };
 
