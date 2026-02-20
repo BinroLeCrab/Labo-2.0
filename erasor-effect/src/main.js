@@ -8,7 +8,7 @@ canvas.style.width = canvas.width / 2 + "px";
 canvas.style.height = canvas.height / 2 + "px";
 
 const brush = canvas.getContext("2d");
-brush.fillStyle = "#ebf1ee";
+brush.fillStyle = "rgba(235, 241, 238, 0.97)";
 brush.fillRect(0, 0, canvas.width, canvas.height);
 
 const h1 = document.querySelector(".content");
@@ -30,9 +30,9 @@ img.onload = function () {
 };
 
 brush.lineCap = "round";
-brush.lineWidth = 200 * 2;
+brush.lineWidth = 150 * 2;
 brush.shadowColor = "rgba(255, 255, 255, 0.5)";
-brush.shadowBlur = 32;
+brush.shadowBlur = 42;
 
 let previousX,
 	previousY = null;
