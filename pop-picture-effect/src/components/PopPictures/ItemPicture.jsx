@@ -14,14 +14,14 @@ const ItemPictures = ({ id, x, y, picture, onComplete}) => {
             transform: "translate(0, 25%)",
             duration: 0.2,
             // transform : "translate(-50%, -50%)",
-            ease: "power2.out"
+            ease: "power3.out"
         })
         tl.to(item_Ref.current, {
             scale: 0,
             opacity: 0,
             delay: 1.5,
             duration: 0.3,
-            ease: "power2.out",
+            ease: "power3.out",
             onComplete: () => {
                 onComplete(id);
             }
