@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import viteLogo from '/vite.svg'
+import Noise from './components/Noise/Noise'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
+      <Noise />
       <p>coucou</p>
     </>
   )
