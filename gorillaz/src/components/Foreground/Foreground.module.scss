@@ -2,8 +2,9 @@
     position: absolute;
     bottom: 0px;
     left: 50vw;
-    width: 80%;
-    height: 80%;
+    max-width: 80%;
+    max-height: 80%;
+    aspect-ratio: 3000 / 1496;
     object-fit: cover;
     transform: translateX(-50%) translateY(10px);
     z-index: 2;
