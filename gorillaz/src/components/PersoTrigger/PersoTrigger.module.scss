@@ -1,0 +1,51 @@
+.container {
+	position: absolute;
+	bottom: 0px;
+	left: 50vw;
+	width: 100%;
+	max-width: 80%;
+	max-height: 80%;
+	object-fit: cover;
+	aspect-ratio: 3000 / 1496;
+	transform: translateX(-50%);
+	// border: 1px solid red;
+	z-index: 10;
+
+	.persoTrigger {
+		position: absolute;
+		transform: translateX(-50%);
+
+		&.twoD {
+			bottom: 42%;
+			left: 53%;
+			width: 10%;
+			height: 37%;
+			// border: 1px solid blue;
+			z-index: 1;
+		}
+		&.russel {
+			bottom: 36%;
+			left: 44%;
+			width: 10%;
+			height: 35%;
+			// border: 1px solid orange;
+			z-index: 2;
+		}
+		&.noodle {
+			bottom: 15%;
+			left: 34%;
+			width: 12%;
+			height: 32%;
+			// border: 1px solid red;
+			z-index: 3;
+		}
+		&.murdok {
+			bottom: 15%;
+			left: 57%;
+			width: 9%;
+			height: 28%;
+			// border: 1px solid greenyellow;
+			z-index: 4;
+		}
+	}
+}
