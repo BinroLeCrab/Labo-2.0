@@ -1,13 +1,14 @@
-import { useState } from 'react'
-import viteLogo from '/vite.svg'
 import Noise from './components/Noise/Noise'
+import Parallax from './components/Parallax/Parallax'
 
 function App() {
 
   return (
     <>
       <Noise />
-      <p>coucou</p>
+      <main className="main">
+        <Parallax />
+      </main>
     </>
   )
 }
