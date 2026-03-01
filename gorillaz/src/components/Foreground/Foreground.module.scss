@@ -1,10 +1,10 @@
 .foreground {
     position: absolute;
-    bottom: -2vh;
+    bottom: 0px;
     left: 50vw;
     width: 80%;
     height: 80%;
     object-fit: cover;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(10px);
     z-index: 2;
 }

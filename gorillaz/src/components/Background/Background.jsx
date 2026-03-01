@@ -1,9 +1,9 @@
 import s from "./Background.module.scss";
 
-const Background= () => {
+const Background= ({ref}) => {
 
     return (
-        <img className={s.background} src="/assets/the-mountain-large_bg.png" alt="" />
+        <img ref={ref} className={s.background} src="/assets/the-mountain-large_bg.png" alt="" />
     );
 };
 
