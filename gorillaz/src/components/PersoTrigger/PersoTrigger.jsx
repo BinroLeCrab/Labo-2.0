@@ -23,8 +23,8 @@ const PersoTrigger = () => {
                 onMouseLeave={() => updateHovered(null)}
             ></div>
             <div
-                className={`${s.persoTrigger} ${s.murdok}`}
-                onMouseEnter={() => updateHovered("murdok")}
+                className={`${s.persoTrigger} ${s.murdoc}`}
+                onMouseEnter={() => updateHovered("murdoc")}
                 onMouseLeave={() => updateHovered(null)}
             ></div>
         </div>
