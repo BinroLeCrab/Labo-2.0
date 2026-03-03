@@ -7,17 +7,15 @@ import PersoTrigger from './components/PersoTrigger/PersoTrigger';
 
 function App() {
 
-  const [someHovered, setSomeHovered] = useState(false);
-
   return (
     <>
       <Noise />
       <main className="main">
         <Parallax />
-        <PersoTrigger setSomeHovered={setSomeHovered} />
+        <PersoTrigger />
       </main>
-      <Audio setSomeHovered={setSomeHovered} />
-      <DynamicCursor hovered={someHovered} />
+      <Audio />
+      <DynamicCursor />
     </>
   )
 }

@@ -1,9 +1,12 @@
+import { useCursor } from "../../store/cursorStore";
 import s from "./Audio.module.scss";
 
-const Audio= ({setSomeHovered}) => {
+const Audio= () => {
+
+    const { updateHovered } = useCursor();
 
     return (
-        <p className={s.audio} onMouseEnter={() => setSomeHovered(true)} onMouseLeave={() => setSomeHovered(false)}>coucou</p>
+        <p className={s.audio} onMouseEnter={() => updateHovered("btn")} onMouseLeave={() => updateHovered(null)}>coucou</p>
     );
 };
 

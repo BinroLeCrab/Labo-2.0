@@ -1,28 +1,31 @@
+import { useCursor } from "../../store/cursorStore";
 import s from "./PersoTrigger.module.scss";
 
-const PersoTrigger = ({ setSomeHovered }) => {
+const PersoTrigger = () => {
+
+    const { updateHovered } = useCursor();
 
     return (
         <div className={s.container}>
             <div
                 className={`${s.persoTrigger} ${s.twoD}`}
-                onMouseEnter={() => setSomeHovered(true)}
-                onMouseLeave={() => setSomeHovered(false)}
+                onMouseEnter={() => updateHovered("twoD")}
+                onMouseLeave={() => updateHovered(null)}
             ></div>
             <div
                 className={`${s.persoTrigger} ${s.russel}`}
-                onMouseEnter={() => setSomeHovered(true)}
-                onMouseLeave={() => setSomeHovered(false)}
+                onMouseEnter={() => updateHovered("russel")}
+                onMouseLeave={() => updateHovered(null)}
             ></div>
             <div
                 className={`${s.persoTrigger} ${s.noodle}`}
-                onMouseEnter={() => setSomeHovered(true)}
-                onMouseLeave={() => setSomeHovered(false)}
+                onMouseEnter={() => updateHovered("noodle")}
+                onMouseLeave={() => updateHovered(null)}
             ></div>
             <div
                 className={`${s.persoTrigger} ${s.murdok}`}
-                onMouseEnter={() => setSomeHovered(true)}
-                onMouseLeave={() => setSomeHovered(false)}
+                onMouseEnter={() => updateHovered("murdok")}
+                onMouseLeave={() => updateHovered(null)}
             ></div>
         </div>
     );
