@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Background from "../Background/Background";
 import Foreground from "../Foreground/Foreground";
 import s from "./Parallax.module.scss";
@@ -34,7 +34,11 @@ const Parallax = () => {
 
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    // attach the listener when component mounts and clean up on unmount
+    useEffect(() => {
+        window.addEventListener("mousemove", handleMouseMove);
+        return () => window.removeEventListener("mousemove", handleMouseMove);
+    }, []);
 
     return (
         <div ref={area_Ref} className={s.parallax}>
