@@ -14,7 +14,7 @@ function App() {
         <Parallax />
         <PersoTrigger />
       </main>
-      <Audio />
+      {/* <Audio /> */}
       <DynamicCursor />
     </>
   )

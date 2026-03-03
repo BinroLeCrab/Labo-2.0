@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import Background from "../Background/Background";
 import Foreground from "../Foreground/Foreground";
 import s from "./Parallax.module.scss";
+import PersoVideo from "../PersoVideo/PersoVideo";
 
 const Parallax = () => {
 
@@ -43,6 +44,7 @@ const Parallax = () => {
     return (
         <div ref={area_Ref} className={s.parallax}>
             <Background ref={bgRef} />
+            <PersoVideo />
             <Foreground ref={fgRef} />
         </div>
     );
