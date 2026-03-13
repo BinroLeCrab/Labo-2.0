@@ -1,12 +1,16 @@
 import { useState } from 'react'
+import BgVideo from './components/BgVideo/BgVideo'
+import Noise from './components/Noise/Noise'
 
 function App() {
 
   return (
     <>
+    <Noise />
+    <main className='main'>
       {/* <p>ASCII effect</p> */}
-      <video src="assets/TURNSTILE.mp4" class="video" loop autoPlay muted>
-      </video>
+      <BgVideo srcUrl='/assets/TURNSTILE.mp4' />
+    </main>
     </>
   )
 }
