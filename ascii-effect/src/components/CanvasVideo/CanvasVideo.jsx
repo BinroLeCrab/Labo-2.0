@@ -23,6 +23,7 @@ const CanvasVideo = ({ srcUrl }) => {
 
     useEffect(() => {
         if (!r_Canvas.current) return;
+        
         r_Canvas.current.width = window.innerWidth;
         r_Canvas.current.height = window.innerHeight;
         r_Canvas.current.style.width = r_Canvas.current.width + 'px';
