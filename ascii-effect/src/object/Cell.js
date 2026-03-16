@@ -1,16 +1,17 @@
 export default class Cell {
 
-    constructor(x, y, size, brightness, color) {
+    constructor(x, y, size) {
         this._x = x;
         this._y = y;
-        this._xCurr = x;
-        this._yCurr = y;
         this.size = size;
-        this.brightness = brightness;
-        this.color = color;
+        // this._xCurr = x;
+        // this._yCurr = y;
+        // this.brightness = brightness;
+        // this.color = color;
     }
 
-    draw(ctx, brightness) {
+    draw(ctx) {
+        
 
         // let newX = this._x;
         // let newY = this._y;

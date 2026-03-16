@@ -1,34 +1,40 @@
 import { useEffect, useRef } from "react";
 import s from "./CanvasVideo.module.scss";
 import BgVideo from "../BgVideo/BgVideo";
+import videoCanvas from "../../object/VideoCanvas";
 
 const CanvasVideo = ({ srcUrl }) => {
 
     const r_Canvas = useRef(null);
     const r_Video = useRef(null);
 
-    const drawVideoOnCanvas = () => {
+    // const drawVideoOnCanvas = () => {
+    //     if (!r_Canvas.current || !r_Video.current) return;
+
+    //     const c = r_Canvas.current;
+
+    //     const v = r_Video.current;
+    //     const { videoWidth, videoHeight } = v;
+    //     c.width = videoWidth;
+    //     c.height = videoHeight;
+    //     const ctx = c.getContext("2d");
+    //     ctx.drawImage(v, 0, 0, c.width, c.height);
+    //     requestAnimationFrame(drawVideoOnCanvas);
+    // };
+
+    const tick = () => {
         if (!r_Canvas.current || !r_Video.current) return;
 
-        const c = r_Canvas.current;
+        videoCanvas.update(r_Video.current);
 
-        const v = r_Video.current;
-        const { videoWidth, videoHeight } = v;
-        c.width = videoWidth;
-        c.height = videoHeight;
-        const ctx = c.getContext("2d");
-        ctx.drawImage(v, 0, 0, c.width, c.height);
-        requestAnimationFrame(drawVideoOnCanvas);
-    };
-
+        requestAnimationFrame(tick);
+    }
     useEffect(() => {
         if (!r_Canvas.current) return;
+
+        videoCanvas.setup(r_Canvas.current);
         
-        r_Canvas.current.width = window.innerWidth;
-        r_Canvas.current.height = window.innerHeight;
-        r_Canvas.current.style.width = r_Canvas.current.width + 'px';
-        r_Canvas.current.style.height = r_Canvas.current.height + 'px';
-        drawVideoOnCanvas();
+        tick();
     }, [r_Canvas]);
 
     return (
