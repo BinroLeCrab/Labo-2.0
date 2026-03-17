@@ -32,7 +32,7 @@ class AsciiCanvas {
 		}
 	}
 
-	draw(canvasVideo, minB, maxB) {
+	draw(canvasVideo, minB, maxB, color) {
 		if (!canvasVideo || !canvasVideo.ctx || !canvasVideo.canvas || canvasVideo.canvas.width === 0 || canvasVideo.canvas.height === 0) return;
 
 		this.canvas.width = canvasVideo.canvas.width;
@@ -47,7 +47,7 @@ class AsciiCanvas {
 		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // reset du canvas
 
 		this.grid.forEach((cell) => {
-			cell.draw(this.ctx, dataFull, vWidth, minB, maxB);
+			cell.draw(this.ctx, dataFull, color, vWidth, minB, maxB);
 		});
 	}
 }

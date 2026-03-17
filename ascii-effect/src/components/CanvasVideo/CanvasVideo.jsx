@@ -17,12 +17,13 @@ const CanvasVideo = ({ srcUrl }) => {
     const maxBrightness = 1;
     const cellSize = 15;
     const gap = 0;
+    const color = "white";
 
     const tick = () => {
         if (!r_CanvasV.current || !r_CanvasA.current || !r_Video.current) return;
 
         videoCanvas.update(r_Video.current);
-        asciiCanvas.draw(videoCanvas, minBrightness, maxBrightness);
+        asciiCanvas.draw(videoCanvas, minBrightness, maxBrightness, color);
 
         requestAnimationFrame(tick);
     }
