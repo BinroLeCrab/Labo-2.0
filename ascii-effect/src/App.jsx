@@ -10,6 +10,7 @@ function App() {
     <Noise />
     <main className='main'>
       {/* <p>ASCII effect</p> */}
+      {/* <CanvasVideo srcUrl='/assets/IDLES.mp4' /> */}
       <CanvasVideo srcUrl='/assets/TURNSTILE.mp4' />
       {/* <BgVideo srcUrl='/assets/TURNSTILE.mp4' /> */}
     </main>
