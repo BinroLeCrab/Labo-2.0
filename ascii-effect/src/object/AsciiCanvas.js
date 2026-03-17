@@ -1,26 +1,24 @@
 import Cell from "./Cell";
 
 class AsciiCanvas {
-	constructor() {
-	}
+	constructor() {}
 
-	setup(canvas, ctxVideo, cellSize, gap) {
+	setup(canvas, cellSize, gap, canvasVideo) {
 		this.canvas = canvas;
-		this.ctxVideo = ctxVideo;
 		this.ctx = this.canvas.getContext("2d");
 		this.grid = [];
 
-		this.canvas.width = window.innerWidth;
-		this.canvas.height = window.innerHeight;
-		this.canvas.style.width = this.canvas.width + "px";
-		this.canvas.style.height = this.canvas.height + "px";
+		this.canvas.width = canvasVideo.canvas.width;
+		this.canvas.height = canvasVideo.canvas.height;
+		this.canvas.style.width = window.innerWidth + "px";
+		this.canvas.style.height = window.innerHeight + "px";
 
 		this.createGrid(cellSize, gap);
 	}
 
 	createGrid(cellSize, gap) {
-		const lines = canvas.height / (cellSize + gap); //calcul du nombre de lignes en fonction de la taille du canvas et des cellules
-		const cols = canvas.width / (cellSize + gap);
+		const lines = this.canvas.height / (cellSize + gap); //calcul du nombre de lignes en fonction de la taille du canvas et des cellules
+		const cols = this.canvas.width / (cellSize + gap);
 
 		for (let iy = 0; iy < lines; iy++) {
 			for (let ix = 0; ix < cols; ix++) {
@@ -34,13 +32,24 @@ class AsciiCanvas {
 		}
 	}
 
-	draw() {
+	draw(canvasVideo, minB, maxB) {
+		if (!canvasVideo || !canvasVideo.ctx || !canvasVideo.canvas || canvasVideo.canvas.width === 0 || canvasVideo.canvas.height === 0) return;
+
+		this.canvas.width = canvasVideo.canvas.width;
+		this.canvas.height = canvasVideo.canvas.height;
+		this.canvas.style.width = window.innerWidth + "px";
+		this.canvas.style.height = window.innerHeight + "px";
+
+		const vWidth = canvasVideo.canvas.width;
+		const dataFull = canvasVideo.ctx.getImageData(0, 0, canvasVideo.canvas.width, canvasVideo.canvas.height).data
+		// console.log(dataFull);
+		// console.log(canvasVideo, canvasVideo.ctx, canvasVideo.canvas, canvasVideo.canvas.width, canvasVideo.canvas.height);
+		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // reset du canvas
+
 		this.grid.forEach((cell) => {
-			cell.draw(this.ctx, 1);
+			cell.draw(this.ctx, dataFull, vWidth, minB, maxB);
 		});
 	}
 }
 
-const asciiCanvas = new AsciiCanvas();
-
-export default asciiCanvas;
+export default AsciiCanvas;

@@ -1,58 +1,48 @@
+import {
+	u_GetBrightness,
+	u_GetGRBA,
+} from "../utils/Binro_Utils_Librarie/dataImage";
+
 export default class Cell {
+	constructor(x, y, size) {
+		this._x = x;
+		this._y = y;
+		this.size = size;
+		// this._xCurr = x;
+		// this._yCurr = y;
+		// this.brightness = brightness;
+		// this.color = color;
+	}
 
-    constructor(x, y, size) {
-        this._x = x;
-        this._y = y;
-        this.size = size;
-        // this._xCurr = x;
-        // this._yCurr = y;
-        // this.brightness = brightness;
-        // this.color = color;
-    }
+	draw(ctx, dataFull, vWidth, min, max) {
+		let pixel = u_GetGRBA(this._x, this._y, dataFull, vWidth);
+		let brightness = u_GetBrightness(pixel);
 
-    draw(ctx) {
-        
+		if (brightness >= min && brightness <= max) {
+			this.drawSquare(ctx, brightness);
+		}
+	}
 
-        // let newX = this._x;
-        // let newY = this._y;
+	drawSquare(ctx, brightness) {
+		ctx.beginPath();
+		ctx.fillStyle = "white";
 
-        // if (mX, mY) {
-        //     let dx = mX - this._x;
-        //     let dy = mY - this._y;
+		ctx.save();
+		ctx.translate(this._x, this._y);
 
-        //     let distance = Math.sqrt(dx * dx + dy * dy);
-        //     let result = 50 - distance
-        //     if (result >= 0) {
-        //         let angle = Math.atan2(-dy, -dx);
+		ctx.translate(this.size / 2, this.size / 2);
+		ctx.scale(brightness, brightness); // scale en fonction de la luminosité
+		ctx.translate(-this.size / 2, -this.size / 2);
 
-        //         newX = this._x + Math.cos(angle) * (result * (1 - this.brightness + 0.1));
-        //         newY = this._y + Math.sin(angle) * (result * (1 - this.brightness + 0.1));
-        //         // newX = this._x + Math.cos(angle) * result;
-        //         // newY = this._y + Math.sin(angle) * result;
-        //     }
-        // }
+		// const offset = this.size * .5
+		// ctx.arc(0 + offset, 0 + offset, this.size / 2, 0, Math.PI * 2)
 
+		const offset = this.size * 0.5;
+		ctx.rect(0 - offset, 0 - offset, this.size, this.size);
 
-        // this._xCurr += (newX - this._xCurr) * .15
-        // this._yCurr += (newY - this._yCurr) * .15
+		ctx.fill();
+		ctx.closePath();
 
-        // ctx.beginPath()
-        // ctx.fillStyle = color ? color : this.color
-
-        // ctx.save()
-        // ctx.translate(this._xCurr, this._yCurr)
-
-        // ctx.translate(this.size / 2, this.size / 2)
-        // ctx.scale(this.brightness * boost, this.brightness * boost) // scale en fonction de la luminosité
-        // ctx.translate(-this.size / 2, -this.size / 2)
-
-        // const offset = this.size * .5
-        // ctx.arc(0 + offset, 0 + offset, this.size / 2, 0, Math.PI * 2)
-
-        // ctx.fill()
-        // ctx.closePath()
-
-        // ctx.restore()
-    }
-
+		ctx.restore();
+	}
 }

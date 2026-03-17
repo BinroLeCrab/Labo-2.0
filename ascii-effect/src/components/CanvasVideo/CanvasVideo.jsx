@@ -1,46 +1,44 @@
 import { useEffect, useRef } from "react";
 import s from "./CanvasVideo.module.scss";
 import BgVideo from "../BgVideo/BgVideo";
-import videoCanvas from "../../object/VideoCanvas";
+import VideoCanvas from "../../object/VideoCanvas";
+import AsciiCanvas from "../../object/AsciiCanvas";
 
 const CanvasVideo = ({ srcUrl }) => {
 
-    const r_Canvas = useRef(null);
+    const r_CanvasV = useRef(null);
+    const r_CanvasA = useRef(null);
     const r_Video = useRef(null);
 
-    // const drawVideoOnCanvas = () => {
-    //     if (!r_Canvas.current || !r_Video.current) return;
+    const videoCanvas = new VideoCanvas();
+    const asciiCanvas = new AsciiCanvas();
 
-    //     const c = r_Canvas.current;
-
-    //     const v = r_Video.current;
-    //     const { videoWidth, videoHeight } = v;
-    //     c.width = videoWidth;
-    //     c.height = videoHeight;
-    //     const ctx = c.getContext("2d");
-    //     ctx.drawImage(v, 0, 0, c.width, c.height);
-    //     requestAnimationFrame(drawVideoOnCanvas);
-    // };
+    const minBrightness = 0.5;
+    const maxBrightness = 1;
+    const cellSize = 15;
+    const gap = 0;
 
     const tick = () => {
-        if (!r_Canvas.current || !r_Video.current) return;
+        if (!r_CanvasV.current || !r_CanvasA.current || !r_Video.current) return;
 
         videoCanvas.update(r_Video.current);
+        asciiCanvas.draw(videoCanvas, minBrightness, maxBrightness);
 
         requestAnimationFrame(tick);
     }
-    useEffect(() => {
-        if (!r_Canvas.current) return;
 
-        videoCanvas.setup(r_Canvas.current);
-        
+    const onLoad = () => {
+        videoCanvas.setup(r_CanvasV.current, r_Video.current);
+        asciiCanvas.setup(r_CanvasA.current, cellSize, gap, videoCanvas);
+
         tick();
-    }, [r_Canvas]);
+    }
 
     return (
         <>
-            <canvas ref={r_Canvas} className={s.canvasVideo}></canvas>
-            <BgVideo srcUrl={srcUrl} ref={r_Video} />
+            <canvas ref={r_CanvasV} className={s.canvasVideo}></canvas>
+            <BgVideo onLoad={onLoad} srcUrl={srcUrl} ref={r_Video} />
+            <canvas ref={r_CanvasA} className={s.canvasAscii}></canvas>
         </>
     );
 };
