@@ -13,7 +13,7 @@ const CanvasVideo = ({ srcUrl }) => {
     const videoCanvas = new VideoCanvas();
     const asciiCanvas = new AsciiCanvas();
 
-    const minBrightness = 0.5;
+    const minBrightness = 0;
     const maxBrightness = 1;
     const cellSize = 15;
     const gap = 0;
