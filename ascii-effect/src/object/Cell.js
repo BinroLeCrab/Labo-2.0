@@ -51,7 +51,7 @@ export default class Cell {
     drawAscii(ctx, brightness) {
 		ctx.beginPath();
 		ctx.fillStyle = "white";
-        ctx.font = `${this.size}px sans-serif`
+        ctx.font = `${this.size}px JetBrains Mono`
         ctx.textAlign = 'center';
         ctx.textBaseline = "middle";
 
