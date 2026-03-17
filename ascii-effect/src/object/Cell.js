@@ -19,7 +19,8 @@ export default class Cell {
 		let brightness = u_GetBrightness(pixel);
 
 		if (brightness >= min && brightness <= max) {
-			this.drawSquare(ctx, brightness);
+			// this.drawSquare(ctx, brightness);
+			this.drawAscii(ctx, brightness);
 		}
 	}
 
@@ -41,6 +42,22 @@ export default class Cell {
 		ctx.rect(0 - offset, 0 - offset, this.size, this.size);
 
 		ctx.fill();
+		ctx.closePath();
+
+		ctx.restore();
+	}
+
+    drawAscii(ctx, brightness) {
+		ctx.beginPath();
+		ctx.fillStyle = "white";
+        ctx.font = `${this.size}px sans-serif`
+        ctx.textAlign = 'center';
+        ctx.textBaseline = "middle";
+
+		const offset = this.size * 0.5;
+        ctx.fillText("#", this._x, this._y);
+
+		// ctx.fill();
 		ctx.closePath();
 
 		ctx.restore();
