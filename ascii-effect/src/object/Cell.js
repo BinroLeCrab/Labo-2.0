@@ -1,4 +1,4 @@
-import { c_Ascii } from "../constant/ascii";
+import { c_Ascii, getAscii } from "../constant/ascii";
 import {
 	u_GetBrightness,
 	u_GetGRBA,
@@ -60,7 +60,8 @@ export default class Cell {
 		const offset = this.size * 0.5;
 		let b = Math.floor(brightness * 10);
 
-		ctx.fillText(c_Ascii[b], this._x, this._y);
+		// ctx.fillText(c_Ascii[b], this._x, this._y);
+		ctx.fillText(getAscii(b), this._x, this._y);
 
 		// ctx.fill();
 		ctx.closePath();
