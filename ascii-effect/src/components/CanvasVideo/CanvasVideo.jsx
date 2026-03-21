@@ -7,7 +7,7 @@ import { useProps } from "../../store/propStore";
 
 const CanvasVideo = ({ srcUrl }) => {
 
-    const { minBrightness, maxBrightness, cellSize, gap, color } = useProps();
+    const { params } = useProps();
 
     const r_CanvasV = useRef(null);
     const r_CanvasA = useRef(null);
@@ -21,14 +21,14 @@ const CanvasVideo = ({ srcUrl }) => {
         if (!r_CanvasV.current || !r_CanvasA.current || !r_Video.current) return;
 
         videoCanvas.update(r_Video.current);
-        asciiCanvas.draw(videoCanvas, minBrightness, maxBrightness, color);
+        asciiCanvas.draw(videoCanvas, params.minBrightness, params.maxBrightness, params.color);
 
         requestAnimationFrame(tick);
     }
 
     const onLoad = () => {
         videoCanvas.setup(r_CanvasV.current, r_Video.current);
-        asciiCanvas.setup(r_CanvasA.current, cellSize, gap, videoCanvas);
+        asciiCanvas.setup(r_CanvasA.current, params.cellSize, params.gap, videoCanvas);
 
         tick();
     }
