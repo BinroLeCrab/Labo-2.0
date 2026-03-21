@@ -3,8 +3,11 @@ import s from "./CanvasVideo.module.scss";
 import BgVideo from "../BgVideo/BgVideo";
 import VideoCanvas from "../../object/VideoCanvas";
 import AsciiCanvas from "../../object/AsciiCanvas";
+import { useProps } from "../../store/propStore";
 
 const CanvasVideo = ({ srcUrl }) => {
+
+    const { minBrightness, maxBrightness, cellSize, gap, color } = useProps();
 
     const r_CanvasV = useRef(null);
     const r_CanvasA = useRef(null);
@@ -13,11 +16,6 @@ const CanvasVideo = ({ srcUrl }) => {
     const videoCanvas = new VideoCanvas();
     const asciiCanvas = new AsciiCanvas();
 
-    const minBrightness = 0.5;
-    const maxBrightness = 1;
-    const cellSize = 15;
-    const gap = 0;
-    const color = "white";
 
     const tick = () => {
         if (!r_CanvasV.current || !r_CanvasA.current || !r_Video.current) return;
