@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import "./ControlsPanel.scss";
 import { useProps } from "../../store/propStore";
 import { Pane } from 'tweakpane';
+import asciiCanvas from "../../object/AsciiCanvas";
 
 const ControlsPanel = () => {
 
@@ -39,15 +40,14 @@ const Panel = () => {
         const pane = paneRef.current;
         const folder = pane.addFolder({ title: "Parameters" });
         
-        // folder.addBinding(params, "minBrightness", { min: 0, max: 1, step: 0.01 }).on("change", (ev) => setMinBrightness(ev.value));
-        // folder.addBinding(params, "maxBrightness", { min: 0, max: 1, step: 0.01 }).on("change", (ev) => setMaxBrightness(ev.value));
-        // folder.addBinding(params, "cellSize", { min: 1, max: 30, step: 1 }).on("change", (ev) => setCellSize(ev.value));
-        // folder.addBinding(params, "gap", { min: 0, max: 10, step: 1 }).on("change", (ev) => setGap(ev.value));
-        // folder.addBinding(params, "color").on("change", (ev) => setColor(ev.value));
         folder.addBinding(params, "minBrightness", { min: 0, max: 1, step: 0.1 });
         folder.addBinding(params, "maxBrightness", { min: 0, max: 1, step: 0.1 });
-        folder.addBinding(params, "cellSize", { min: 1, max: 30, step: 1 });
-        folder.addBinding(params, "gap", { min: 0, max: 10, step: 1 });
+        folder.addBinding(params, "cellSize", { min: 1, max: 50, step: 1 }).on("change", (ev) => {
+            asciiCanvas.createGrid(ev.value, params.gap);
+        });
+        folder.addBinding(params, "gap", { min: 0, max: 50, step: 1 }).on("change", (ev) => {
+            asciiCanvas.createGrid(params.cellSize, ev.value);
+        });
         folder.addBinding(params, "color", { view: "color", picker: "inline", expanded: true });
 
         // Nettoyage

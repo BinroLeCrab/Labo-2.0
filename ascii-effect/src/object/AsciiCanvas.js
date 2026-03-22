@@ -17,6 +17,9 @@ class AsciiCanvas {
 	}
 
 	createGrid(cellSize, gap) {
+
+		this.grid = [];
+		
 		const lines = this.canvas.height / (cellSize + gap); //calcul du nombre de lignes en fonction de la taille du canvas et des cellules
 		const cols = this.canvas.width / (cellSize + gap);
 
@@ -52,4 +55,6 @@ class AsciiCanvas {
 	}
 }
 
-export default AsciiCanvas;
+const asciiCanvas = new AsciiCanvas();
+
+export default asciiCanvas;

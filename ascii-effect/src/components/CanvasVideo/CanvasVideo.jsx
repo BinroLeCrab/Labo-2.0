@@ -4,6 +4,7 @@ import BgVideo from "../BgVideo/BgVideo";
 import VideoCanvas from "../../object/VideoCanvas";
 import AsciiCanvas from "../../object/AsciiCanvas";
 import { useProps } from "../../store/propStore";
+import asciiCanvas from "../../object/AsciiCanvas";
 
 const CanvasVideo = ({ srcUrl }) => {
 
@@ -14,8 +15,6 @@ const CanvasVideo = ({ srcUrl }) => {
     const r_Video = useRef(null);
 
     const videoCanvas = new VideoCanvas();
-    const asciiCanvas = new AsciiCanvas();
-
 
     const tick = () => {
         if (!r_CanvasV.current || !r_CanvasA.current || !r_Video.current) return;
