@@ -1,3 +1,16 @@
 .tp-dfwv {
     z-index: 999;
 }
+
+.toggle-info {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 0px 0.25em;
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    pointer-events: none;
+    z-index: 10;
+}

@@ -6,6 +6,9 @@ import asciiCanvas from "../../object/AsciiCanvas";
 
 const ControlsPanel = () => {
 
+    const { params, setMinBrightness, setMaxBrightness, setCellSize, setGap, setColor } = useProps();
+    const paneRef = useRef(null);
+
     const [show, setShow] = useState(true);
 
     const handleKeyDown = (e) => {
@@ -15,21 +18,15 @@ const ControlsPanel = () => {
     }
 
     useEffect(() => {
-        window.addEventListener("keydown", handleKeyDown);
-        return () => window.removeEventListener("keydown", handleKeyDown);
-    }, []);
+        const pane = document.querySelector(".tp-dfwv");
+        if (!pane) return;
 
-    return (
-        <>
-            {show && <Panel />}
-        </>
-    );
-};
-
-const Panel = () => {
-
-    const { params, setMinBrightness, setMaxBrightness, setCellSize, setGap, setColor } = useProps();
-    const paneRef = useRef(null);
+        if (show) {
+            pane.style.display = "block";
+        } else {
+            pane.style.display = "none";
+        }
+    }, [show]);
 
     useEffect(() => {
         // Crée la Pane une seule fois
@@ -39,7 +36,7 @@ const Panel = () => {
 
         const pane = paneRef.current;
         const folder = pane.addFolder({ title: "Parameters" });
-        
+
         folder.addBinding(params, "minBrightness", { min: 0, max: 1, step: 0.1 });
         folder.addBinding(params, "maxBrightness", { min: 0, max: 1, step: 0.1 });
         folder.addBinding(params, "cellSize", { min: 1, max: 50, step: 1 }).on("change", (ev) => {
@@ -50,14 +47,21 @@ const Panel = () => {
         });
         folder.addBinding(params, "color", { view: "color", picker: "inline", expanded: true });
 
+        window.addEventListener("keydown", handleKeyDown);
+
         // Nettoyage
         return () => {
             pane.dispose();
             paneRef.current = null;
+            window.removeEventListener("keydown", handleKeyDown)
         };
     }, []);
 
-    return <></>
+    return (
+        <>
+            {!show && <div className="toggle-info">Press "c" to customize</div>}
+        </>
+    )
 }
 
 export default ControlsPanel;
