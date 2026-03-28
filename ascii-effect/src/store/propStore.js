@@ -8,15 +8,19 @@ export const useProps = create((set) => ({
         cellSize: 15,
         gap: 0,
         color: "#ffffff",
-        asciiMode: "classic",
+        asciiMode: "default",
         asciiContrast: false,
         medianBrightness: 5,
+        showVideo: true,
+        bgColor: "#10131d"
     },
 
-    setMinBrightness: (value) => set({ params: { ...state.params, minBrightness: value } }),
-    setMaxBrightness: (value) => set({ params: { ...state.params, maxBrightness: value } }),
-    setCellSize: (value) => set({ params: { ...state.params, cellSize: value } }),
-    setGap: (value) => set({ params: { ...state.params, gap: value } }),
-    setColor: (value) => set({ params: { ...state.params, color: value } })
+    setMinBrightness: (value) => set((state) => ({ params: { ...state.params, minBrightness: value } })),
+    setMaxBrightness: (value) => set((state) => ({ params: { ...state.params, maxBrightness: value } })),
+    setCellSize: (value) => set((state) => ({ params: { ...state.params, cellSize: value } })),
+    setGap: (value) => set((state) => ({ params: { ...state.params, gap: value } })),
+    setColor: (value) => set((state) => ({ params: { ...state.params, color: value } })),
+    setShowVideo: (value) => set((state) => ({ params: { ...state.params, showVideo: value } })),
+    setBackgroundColor: (value) => set((state) => ({ params: { ...state.params, bgColor: value } }))
 
 }));

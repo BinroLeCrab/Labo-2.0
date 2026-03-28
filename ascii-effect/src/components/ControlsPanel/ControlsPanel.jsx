@@ -6,7 +6,7 @@ import asciiCanvas from "../../object/AsciiCanvas";
 
 const ControlsPanel = () => {
 
-    const { params, setMinBrightness, setMaxBrightness, setCellSize, setGap, setColor } = useProps();
+    const { params, setShowVideo, setBackgroundColor } = useProps();
     const paneRef = useRef(null);
 
     const [show, setShow] = useState(false);
@@ -31,24 +31,68 @@ const ControlsPanel = () => {
     useEffect(() => {
         // Crée la Pane une seule fois
         if (!paneRef.current) {
-            paneRef.current = new Pane();
+            paneRef.current = new Pane({ title: "Parameters" });
         }
 
         const pane = paneRef.current;
-        const folder = pane.addFolder({ title: "Parameters" });
+        const folderBasic = pane.addFolder({ title: "Basic" });
 
-        folder.addBinding(params, "minBrightness", { min: 0, max: 1, step: 0.1 });
-        folder.addBinding(params, "maxBrightness", { min: 0, max: 1, step: 0.1 });
-        folder.addBinding(params, "cellSize", { min: 1, max: 50, step: 1 }).on("change", (ev) => {
+        folderBasic.addBinding(params, "minBrightness", {
+            label: 'Min Brightness',
+            min: 0, max: 1, step: 0.1
+        });
+        folderBasic.addBinding(params, "maxBrightness", {
+            label: 'Max Brightness',
+            min: 0, max: 1, step: 0.1
+        });
+        folderBasic.addBinding(params, "medianBrightness", {
+            label: 'Median Brightness',
+            min: 0, max: 10, step: 1
+        });
+        folderBasic.addBinding(params, "cellSize", {
+            label: 'Cell Size',
+            min: 8, max: 50, step: 1
+        }).on("change", (ev) => {
             asciiCanvas.createGrid(ev.value, params.gap);
         });
-        folder.addBinding(params, "gap", { min: 0, max: 50, step: 1 }).on("change", (ev) => {
+        folderBasic.addBinding(params, "gap", {
+            label: 'Cell Gap',
+            min: 0, max: 50, step: 1
+        }).on("change", (ev) => {
             asciiCanvas.createGrid(params.cellSize, ev.value);
         });
-        folder.addBinding(params, "color", { view: "color", picker: "inline", expanded: true });
-        folder.addBinding(params, "asciiMode", { options: { default:"default", classic: "classic", numeric: "numeric", symbol: "symbol", letters: "letters", bichrome: "bichrome" } });
-        folder.addBinding(params, "asciiContrast", { view: "checkbox" });
-        folder.addBinding(params, "medianBrightness", { min: 0, max: 10, step: 1 });
+        folderBasic.addBinding(params, "color", {
+            label: 'Cell Color',
+            view: "color",
+            picker: "inline",
+            expanded: true
+        });
+
+        const folderAscii = pane.addFolder({ title: "ASCII" });
+        folderAscii.addBinding(params, "asciiMode", {
+            label: 'ASCII Mode',
+            options: { default: "default", classic: "classic", numeric: "numeric", symbol: "symbol", letters: "letters", bichrome: "bichrome" }
+        });
+        folderAscii.addBinding(params, "asciiContrast", {
+            label: 'ASCII Contrast',
+            view: "checkbox"
+        });
+        const folderBg = pane.addFolder({ title: "Background" });
+        folderBg.addBinding(params, "showVideo", {
+            label: 'Show Video',
+            view: "checkbox"
+        }).on("change", (ev) => {
+            setShowVideo(ev.value);
+        });
+        folderBg.addBinding(params, "bgColor", {
+            label: 'Background Color',
+            view: "color",
+            picker: "inline",
+            expanded: true
+        }).on("change", (ev) => {
+            setBackgroundColor(ev.value);
+        });
+
         const paneDOM = document.querySelector(".tp-dfwv");
 
         if (show) {

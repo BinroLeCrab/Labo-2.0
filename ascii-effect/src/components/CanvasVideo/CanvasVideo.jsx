@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import s from "./CanvasVideo.module.scss";
 import BgVideo from "../BgVideo/BgVideo";
 import VideoCanvas from "../../object/VideoCanvas";
-import AsciiCanvas from "../../object/AsciiCanvas";
 import { useProps } from "../../store/propStore";
 import asciiCanvas from "../../object/AsciiCanvas";
 
@@ -33,11 +32,11 @@ const CanvasVideo = ({ srcUrl }) => {
     }
 
     return (
-        <>
+        <div className={s.container} style={{ backgroundColor: params.bgColor }}>
             <canvas ref={r_CanvasV} className={s.canvasVideo}></canvas>
             <BgVideo onLoad={onLoad} srcUrl={srcUrl} ref={r_Video} />
             <canvas ref={r_CanvasA} className={s.canvasAscii}></canvas>
-        </>
+        </div>
     );
 };
 
