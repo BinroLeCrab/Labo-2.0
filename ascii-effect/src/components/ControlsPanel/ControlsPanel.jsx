@@ -9,7 +9,7 @@ const ControlsPanel = () => {
     const { params, setMinBrightness, setMaxBrightness, setCellSize, setGap, setColor } = useProps();
     const paneRef = useRef(null);
 
-    const [show, setShow] = useState(true);
+    const [show, setShow] = useState(false);
 
     const handleKeyDown = (e) => {
         if (e.key === "c") {
@@ -46,6 +46,16 @@ const ControlsPanel = () => {
             asciiCanvas.createGrid(params.cellSize, ev.value);
         });
         folder.addBinding(params, "color", { view: "color", picker: "inline", expanded: true });
+        folder.addBinding(params, "asciiMode", { options: { default:"default", classic: "classic", numeric: "numeric", symbol: "symbol", letters: "letters", bichrome: "bichrome" } });
+        folder.addBinding(params, "asciiContrast", { view: "checkbox" });
+        folder.addBinding(params, "medianBrightness", { min: 0, max: 10, step: 1 });
+        const paneDOM = document.querySelector(".tp-dfwv");
+
+        if (show) {
+            paneDOM.style.display = "block";
+        } else {
+            paneDOM.style.display = "none";
+        }
 
         window.addEventListener("keydown", handleKeyDown);
 

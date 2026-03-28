@@ -8,6 +8,9 @@ export const useProps = create((set) => ({
         cellSize: 15,
         gap: 0,
         color: "#ffffff",
+        asciiMode: "classic",
+        asciiContrast: false,
+        medianBrightness: 5,
     },
 
     setMinBrightness: (value) => set({ params: { ...state.params, minBrightness: value } }),

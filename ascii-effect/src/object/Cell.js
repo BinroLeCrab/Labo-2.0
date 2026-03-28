@@ -15,13 +15,13 @@ export default class Cell {
 		// this.color = color;
 	}
 
-	draw(ctx, dataFull, color, vWidth, min, max) {
+	draw(ctx, dataFull, vWidth, params) {
 		let pixel = u_GetGRBA(this._x, this._y, dataFull, vWidth);
 		let brightness = u_GetBrightness(pixel);
 
-		if (brightness >= min && brightness <= max) {
+		if (brightness >= params.minBrightness && brightness <= params.maxBrightness) {
 			// this.drawSquare(ctx, brightness);
-			this.drawAscii(ctx, color, brightness);
+			this.drawAscii(ctx, params.color, params.asciiMode, params.asciiContrast, brightness, params.medianBrightness);
 		}
 	}
 
@@ -48,7 +48,7 @@ export default class Cell {
 		ctx.restore();
 	}
 
-	drawAscii(ctx, color, brightness) {
+	drawAscii(ctx, color, asciiMode, contrast, brightness, medianBrightness = 5) {
 		ctx.beginPath();
 		ctx.fillStyle = color;
 		ctx.font = `${this.size}px JetBrains Mono`;
@@ -61,7 +61,7 @@ export default class Cell {
 		let b = Math.floor(brightness * 10);
 
 		// ctx.fillText(c_Ascii[b], this._x, this._y);
-		ctx.fillText(getAscii(b), this._x, this._y);
+		ctx.fillText(getAscii(b, medianBrightness, asciiMode, contrast), this._x, this._y);
 
 		// ctx.fill();
 		ctx.closePath();

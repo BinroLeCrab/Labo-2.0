@@ -20,7 +20,7 @@ const CanvasVideo = ({ srcUrl }) => {
         if (!r_CanvasV.current || !r_CanvasA.current || !r_Video.current) return;
 
         videoCanvas.update(r_Video.current);
-        asciiCanvas.draw(videoCanvas, params.minBrightness, params.maxBrightness, params.color);
+        asciiCanvas.draw(videoCanvas, params);
 
         requestAnimationFrame(tick);
     }
