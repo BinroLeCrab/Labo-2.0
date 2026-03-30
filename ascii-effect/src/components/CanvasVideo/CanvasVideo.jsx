@@ -35,7 +35,7 @@ const CanvasVideo = ({ srcUrl }) => {
         <div className={s.container} style={{ backgroundColor: params.bgColor }}>
             <canvas ref={r_CanvasV} className={s.canvasVideo}></canvas>
             <BgVideo onLoad={onLoad} srcUrl={srcUrl} ref={r_Video} />
-            <canvas ref={r_CanvasA} className={s.canvasAscii}></canvas>
+            <canvas ref={r_CanvasA} className={s.canvasAscii} style={{ backdropFilter: `blur(${params.bgBlur}px)` }}></canvas>
         </div>
     );
 };

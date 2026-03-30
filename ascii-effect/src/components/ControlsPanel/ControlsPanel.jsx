@@ -6,7 +6,7 @@ import asciiCanvas from "../../object/AsciiCanvas";
 
 const ControlsPanel = () => {
 
-    const { params, setShowVideo, setBackgroundColor } = useProps();
+    const { params, setShowVideo, setBackgroundColor, setBackgroundBlur } = useProps();
     const paneRef = useRef(null);
 
     const [show, setShow] = useState(false);
@@ -37,6 +37,11 @@ const ControlsPanel = () => {
         const pane = paneRef.current;
         const folderBasic = pane.addFolder({ title: "Basic" });
 
+        folderBasic.addBinding(params, "invertBrightness", {
+            label: 'Invert Brightness',
+            view: "checkbox"
+        });
+
         folderBasic.addBinding(params, "minBrightness", {
             label: 'Min Brightness',
             min: 0, max: 1, step: 0.1
@@ -61,12 +66,21 @@ const ControlsPanel = () => {
         }).on("change", (ev) => {
             asciiCanvas.createGrid(params.cellSize, ev.value);
         });
+        folderBasic.addBinding(params, "colorMode", {
+            label: 'Color Mode',
+            options: { monochrome: "monochrome", colored: "colored" }
+        });
         folderBasic.addBinding(params, "color", {
             label: 'Cell Color',
             view: "color",
             picker: "inline",
             expanded: true
         });
+        folderBasic.addBinding(params, "boostBrightness", {
+            label: 'Boost Brightness',
+            min: 0, max: 0.2, step: 0.01
+        });
+
 
         const folderAscii = pane.addFolder({ title: "ASCII" });
         folderAscii.addBinding(params, "asciiMode", {
@@ -91,6 +105,12 @@ const ControlsPanel = () => {
             expanded: true
         }).on("change", (ev) => {
             setBackgroundColor(ev.value);
+        });
+        folderBg.addBinding(params, "bgBlur", {
+            label: 'Background Blur',
+            min: 0, max: 20, step: 1
+        }).on("change", (ev) => {
+            setBackgroundBlur(ev.value);
         });
 
         const paneDOM = document.querySelector(".tp-dfwv");

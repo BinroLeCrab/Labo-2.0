@@ -2,6 +2,8 @@ import { c_Ascii, getAscii } from "../constant/ascii";
 import {
 	u_GetBrightness,
 	u_GetGRBA,
+	u_IncreaseHexBrightness,
+	u_RGBAtoHex,
 } from "../utils/Binro_Utils_Librarie/dataImage";
 
 export default class Cell {
@@ -17,11 +19,17 @@ export default class Cell {
 
 	draw(ctx, dataFull, vWidth, params) {
 		let pixel = u_GetGRBA(this._x, this._y, dataFull, vWidth);
+		
 		let brightness = u_GetBrightness(pixel);
 
 		if (brightness >= params.minBrightness && brightness <= params.maxBrightness) {
 			// this.drawSquare(ctx, brightness);
-			this.drawAscii(ctx, params.color, params.asciiMode, params.asciiContrast, brightness, params.medianBrightness);
+
+			brightness = params.invertBrightness ? 1 - brightness : brightness;
+
+			let color = params.colorMode === "colored" ? u_RGBAtoHex(pixel) : params.color;
+
+			this.drawAscii(ctx, color, brightness, params);
 		}
 	}
 
@@ -48,20 +56,20 @@ export default class Cell {
 		ctx.restore();
 	}
 
-	drawAscii(ctx, color, asciiMode, contrast, brightness, medianBrightness = 5) {
+	drawAscii(ctx, color, brightness, params) {
 		ctx.beginPath();
-		ctx.fillStyle = color;
+		ctx.fillStyle = params.boostBrightness > 0 ? u_IncreaseHexBrightness(color, params.boostBrightness) : color;
 		ctx.font = `${this.size}px JetBrains Mono`;
 		ctx.textAlign = "center";
 		ctx.textBaseline = "middle";
 		ctx.shadowColor = color;
-		ctx.shadowBlur = 20;
+		ctx.shadowBlur = 20 + brightness * 10; // ajouter un glow en fonction de la luminosité
 
 		const offset = this.size * 0.5;
 		let b = Math.floor(brightness * 10);
 
 		// ctx.fillText(c_Ascii[b], this._x, this._y);
-		ctx.fillText(getAscii(b, medianBrightness, asciiMode, contrast), this._x, this._y);
+		ctx.fillText(getAscii(b, params.medianBrightness, params.asciiMode, params.asciiContrast), this._x, this._y);
 
 		// ctx.fill();
 		ctx.closePath();
