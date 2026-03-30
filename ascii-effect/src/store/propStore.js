@@ -11,7 +11,7 @@ export const useProps = create((set) => ({
         colorMode: "monochrome",
         color: "#ffffff",
         boostBrightness: 0,
-        asciiMode: "default",
+        asciiMode: "classic",
         asciiContrast: false,
         medianBrightness: 5,
         showVideo: true,

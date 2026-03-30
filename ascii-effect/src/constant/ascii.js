@@ -1,17 +1,4 @@
 export const c_Ascii = {
-	default: [
-		[" "], // 10 (très clair)
-		[".", "-"], // 9
-		[";", ":", ",", "^", "~"], // 8
-		["+", "="], // 7
-		["I", "7", "1", "T"], // 6
-		["C", "L", "F"], // 5
-		["U", "S", "E"], // 4
-		["R", "N"], // 3
-		["D", "O", "0"], // 2
-		["B", "8", "&", "$"], // 1
-		["@", "%", "#"], // 0 (très sombre)
-	],
 	classic: [
 		[" ", "."], // 10
 		["-", "`"], // 9
@@ -24,6 +11,19 @@ export const c_Ascii = {
 		["8", "B"], // 2
 		["@", "%"], // 1
 		["#", "@"], // 0
+	],
+	noise: [
+		[" "], // 10 (très clair)
+		[".", "-"], // 9
+		[";", ":", ",", "^", "~"], // 8
+		["+", "="], // 7
+		["I", "7", "1", "T"], // 6
+		["C", "L", "F"], // 5
+		["U", "S", "E"], // 4
+		["R", "N"], // 3
+		["D", "O", "0"], // 2
+		["B", "8", "&", "$"], // 1
+		["@", "%", "#"], // 0 (très sombre)
 	],
 	numeric: [
 		[" ", "."], // 10
@@ -99,7 +99,7 @@ const asciiLevels = [
 export const getAscii = (
 	b,
 	medianBrightness = 5,
-	mode = "default",
+	mode = "classic",
 	contrast = false
 ) => {
 
@@ -113,7 +113,7 @@ export const getAscii = (
 
 	const row = c_Ascii[mode][b];
 
-	if (mode === "default") {
+	if (mode === "noise") {
 		if (row.length === 1) return row[0];
 		return row[Math.floor(Math.random() * row.length)];
 	} else if (contrast) {

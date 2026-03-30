@@ -85,7 +85,7 @@ const ControlsPanel = () => {
         const folderAscii = pane.addFolder({ title: "ASCII" });
         folderAscii.addBinding(params, "asciiMode", {
             label: 'ASCII Mode',
-            options: { default: "default", classic: "classic", numeric: "numeric", symbol: "symbol", letters: "letters", bichrome: "bichrome" }
+            options: { classic: "classic", noise: "noise", numeric: "numeric", symbol: "symbol", letters: "letters", bichrome: "bichrome" }
         });
         folderAscii.addBinding(params, "asciiContrast", {
             label: 'ASCII Contrast',
